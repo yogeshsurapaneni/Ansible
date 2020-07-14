@@ -1,0 +1,27 @@
+---
+- hosts: all
+- name: centos repos
+  action: >
+      {{ ansible_pkg_mgr }} name={{ item }} state=present update_cache=yes
+  with_items:
+      - epel-release
+      - java-1.8.0-openjdk.x86_64
+      - wget
+- name: updating java path.
+  shell: echo 'export JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk' | sudo tee -a /etc/profile
+  shell: echo 'export JRE_HOME=/usr/lib/jvm/jre' | sudo tee -a /etc/profile
+  shell: source /etc/profile
+  shell: cd ~
+  shell: sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  shell: sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+- name: install
+  action: >
+      {{ ansible_pkg_mgr }} name={{ item }} state=present update_cache=yes
+  with_items:
+      - jenkins
+- name: Restart service , in all cases
+  service:
+    name: jenkins
+    state: restarted
+    enabled: yes

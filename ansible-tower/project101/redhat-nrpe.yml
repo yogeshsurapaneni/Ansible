@@ -1,0 +1,21 @@
+- hosts: all
+  tasks:
+    - name: Update and Upgrade Packages
+      become: yes
+      yum:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400
+    - name: install nrpe
+      become: yes
+      action: >
+        {{ ansible_pkg_mgr }} name={{ item }} state=present update_cache=yes
+      with_items:
+        - nagios-nrpe-server
+        - nagios-plugins
+        - httpd
+    - lineinfile:
+        path: /etc/nagios/nrpe.cfg
+        regexp: '^server_address'
+        insertafter: '^server_address='
+        line: 'server_address=10.0.0.6'

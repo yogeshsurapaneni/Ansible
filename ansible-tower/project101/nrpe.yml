@@ -1,0 +1,4 @@
+---
+- hosts: all
+  roles: 
+     - /var/lib/awx/projects/myproject/roles/nagios-nrpe

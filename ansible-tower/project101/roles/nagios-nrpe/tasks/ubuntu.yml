@@ -1,0 +1,25 @@
+- name: Update and Upgrade Packages
+  become: yes
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400
+- name: install nrpe
+  become: yes
+    action: >
+      {{ ansible_pkg_mgr }} name={{ item }} state=present update_cache=yes
+    with_items:
+      - nagios-nrpe-server
+      - nagios-plugins
+      - apache2
+- lineinfile:
+  become: yes
+    path: /etc/nagios/nrpe.cfg
+    regexp: '^server_address'
+    insertafter: '^server_address='
+    line: 'server_address=10.0.0.6'
+- name: Restart service nagios, in all cases
+  become: yes
+  service:
+    name: nagios-nrpe-server
+    state: restarted

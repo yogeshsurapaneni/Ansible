@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+    - lineinfile:
+        path: /root/.ssh/authorized_keys
+        line: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCv+L+eXeg68wPx2ivsNRP0
+ZPoXpwe9uiW70zVB+CWkjP+rBaQ3prHgoFuZ0iZQ+X6WvSIjBqhUR97mnbVCwz7EUB6kJwrRn0N
+zD3r6af8CqZNicqK0BdO7kVYMW+juD3M03VyjqXXqnKmEC2ZYZ5XjSAWM1UEF64K+MfABOOuwoB
+MtJrgE1mWGQmGMGPrJbjz8e9SEMaDzjCPfv0oTTSPE4+z9dTjI18SAgnuDgHGvZZCTjNWULPgcs
+qXGqnjQczAYwjhhejV8QW6BJnfxTlpfalEJLRp2CL2HQkdNxdSgPXU9YBn1nWWje8hdQKPfo5V9
+VZaoWuSVSY4+/ETqa2LX root@cent-anstow'
+      become: yes

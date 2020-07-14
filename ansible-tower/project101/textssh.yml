@@ -1,0 +1,33 @@
+---
+- hosts: all
+  tasks:
+    - name: clean authorized_keys
+      file:
+        state: absent
+        path: /root/.ssh/authorized_keys
+      become: yes
+    - name: ensure authorized_keys file exists
+      copy:
+        content: ""
+        dest: /root/.ssh/authorized_keys
+        force: no
+        owner: root
+        mode: 0600
+      become: yes
+    - lineinfile:
+        path: /root/.ssh/authorized_keys
+        line: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCTNR1ZXzGO4JVCtHrwbhNyIawvtYyTNansb+VQhj8Q/OXxg3XETDW20zywk/ZG1TFnR4o/rWHlUiTaLBIFcWID9rwLTb0Um8bWF1iwTsoppJZpBvuw2joLFzOTDHRdh3pmqpZKGJL4U4iP53M/Sxr744AHSYP6+sOBmuHWCR3vX/c18AH69y2B4J8/ENG9ujJBQgcyKmpz7KDYofWHBqVFZ26MrYSF/tZAz9D7TnMUozVn1VSpVi9SeYw10QL0lxXYMcOL64Q2fxxvKh5dgvnhLRtRQBszuw8L5Q99tlJWI844hTYZTsVu+3cxR0tIimhVlICeuBIVBNJaxUy+XXFH root@chefstation
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQClHCQn9NEaUk0YOYZK91+8QS7rKtpcG4t0UfZjwt5yVPh74v6sgKjcSFpkBqrER413N0yA/tByc9bDe7fgSGGd5OnhZEN/Ye1JXUu7v4MzmcbuMP3n50jBU3yVpsOTu/pZZ24hvIvDGbq+xRht2iyVmG/S1cBo5kG2WCocxdS+QM549CPfM2lP8Fow2QhEDDLleoYtZE7y55fwtoaqNaUTV6PxAVXQvImkf7L0C1rTcrahToEWf9EZYyi11qcCVNNiBGpu//AoMSKyADo1KP2gOnTNCcxFc0adqRFnXV5eynOpA4uAx48xPalOettrTJPf6uwd29NNGmI/IiTlNeRn root@rhel7
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7ow0D+vceDNm9jTEhSZiNkIO7qjLJwpvzasWv1sV5IeiXfzaH3gcnu00o9zQDkpKeULvjnvX9Fcd1APTnDvTNfLkwjMaTA2lRObZqIlglSkmwaMk48E8Q6Uam78VWNhyrX53WPpL7zfxtd506B3nwXCJggc5rI+hK7NCtZlb5ymCDlqZmgOYD6iRb2Ez/+COL71jDdr+M2aLT91ztYgVjP38u+vC61SAPTESoGp34E7g5Q2vYSf/A/PNVwn9he8ADb1/gPmRTk8js44a/ELBfkIvMBm8QzmDeDzu9GY6mG+jLb1migBveyYL9l4nvNM+BHZHp4iFj4mgoTB9AF6qp root@puppet
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDxVtJrA+bpxDx30XKscGj77p8v748RZJFi+/RRSp/wIxW33CwezIC5baXURtfZ7Hd8g2jX5zGE9NzY+kSVEgT66o4mX74Tqm+fejMIaPLA/LI4zrADyHAi/9TAszvLx6UDgZBoTb9GlSOCGAs61QQH+ESQ5fcBT+++R9NKQF1SI5V3kw3NhdMUuw5y66IxnTZN4DNG3BOaEw+8GgKojHryiYFm1r+Ug5qQWf0qJZwQ+O8Jqyo80pwBRuNM7RX2kn1R7br2KkhNRyPjszFM3g628E3GvQNayZnihIdRz7Bjb2BrhGQwWRz5jtTzzTKjIyHqPDCRBAjE4yBiLLPmS9mp root@buildtool
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1SzOp4iLCmtu7NLFwfK8c4eluZFt5Pw2n0ZxdBgNbxWQd0QgWtO96Cean0TuD2Qml1qj9MhnU9Pjwp+0+WoBx8gQoOLLsaXmiy8sKBm0JG7KqCJgIofvzy7inLQp3tdSY3JEm8FaFkmVpofFuFCmPkMct1dp4gB5uJUP1a08ryoUWH88Z51No3eobBOwyceHG5LvlNWd/skZG6h/PUQ7TypBji/SifQrjDvG4UNyxvko0i5XqRYC7stA9ywM8DYTCemvCJQrA0gkY62L7dYM8MctnH8ydkcSfCmHVFvucu+QfBLm66eCEaXIvr3Se8NyMC8ef72wAppOfQna6xhkh root@cent-anstow
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCv+L+eXeg68wPx2ivsNRP0ZPoXpwe9uiW70zVB+CWkjP+rBaQ3prHgoFuZ0iZQ+X6WvSIjBqhUR97mnbVCwz7EUB6kJwrRn0NzD3r6af8CqZNicqK0BdO7kVYMW+juD3M03VyjqXXqnKmEC2ZYZ5XjSAWM1UEF64K+MfABOOuwoBMtJrgE1mWGQmGMGPrJbjz8e9SEMaDzjCPfv0oTTSPE4+z9dTjI18SAgnuDgHGvZZCTjNWULPgcsqXGqnjQczAYwjhhejV8QW6BJnfxTlpfalEJLRp2CL2HQkdNxdSgPXU9YBn1nWWje8hdQKPfo5V9VZaoWuSVSY4+/ETqa2LX root@cent-anstow
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFxhQq/Rn0OYHXYXxB1enS0g9NJjKnWtZ6IQCYJ/UTgJYs19YSBmwTvH/Qf8kMPhoqPLduCm64AUc6+Q8ouVJc60HyWVSIDntDmz9PPzp8Bs4HF4T/ivOAA/FvZBeQ1KWTrF30RVIdiM53iPrkx+gn5OGbN3rqCS+Mrlt3ZIbDeP4jf75Sqd8cPK3RDtEr5xgm40OIKqI/EjaCccOVVQ6h6RwjBTHlutozINazaDGp56Yv0rRYdZPxWxUFY95MuD4tbJC3k1OFw7cMwQDNOZFEDYB7A5fbqmrWP4YoUAs7QGDLRS611QcDNV4BM0t6Ik+cZOGbp/P/vEyLNxaUCzIn root@kuber'
+
+      become: yes 

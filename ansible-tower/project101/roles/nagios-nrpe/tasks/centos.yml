@@ -1,0 +1,28 @@
+- name: install nrpe repos
+    action: >
+      {{ ansible_pkg_mgr }} name={{ item }} state=present update_cache=yes
+    with_items:
+      - epel-release
+      - tree
+      - wget 
+- name: install nrpe
+    action: >
+      {{ ansible_pkg_mgr }} name={{ item }} state=present update_cache=yes
+    with_items:
+      - nrpe
+      - nagios-plugins-users
+      - nagios-plugins-load
+      - nagios-plugins-swap
+      - nagios-plugins-disk
+      - nagios-plugins-procs
+
+- lineinfile:
+    path: /etc/nagios/nrpe.cfg
+    regexp: '^server_address'
+    insertafter: '^server_address='
+    line: 'server_address=10.0.0.6'
+- name: Restart service httpd, in all cases
+  service:
+    name: nrpe
+    state: restarted
+    enabled: yes

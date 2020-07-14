@@ -1,0 +1,6 @@
+---
+- hosts: all
+- name: chef -client
+  tasks:
+    shell: chef-client
+
